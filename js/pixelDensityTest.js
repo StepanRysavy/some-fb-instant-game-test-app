@@ -41,7 +41,10 @@ var pixelDensityTest = function () {
 	});
 
 	root.ctx.mousedown = function (e) {
-		TweenMax.to(root.like.pos, 1, {x: e.touches[0].x});
+
+		var x = e.x || e.touches[0].x;
+
+		TweenMax.to(root.like.pos, 1, {x: x});
 	};
 }
 

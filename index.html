@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="full-screen" content="yes"/>
+  <meta name="screen-orientation" content="portrait"/>
+
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  
+</head>
+<body>
+  
+  <!-- build:js -->
+  <script src="js/mock/fbinstant.6.0.mock.js"></script>
+  <!-- endbuild -->
+
+  <script src="js/lib/TweenMax.min.js" ></script>
+  <script src="js/lib/sketch.js" ></script>
+  <script src="js/pixelDensityTest.js" ></script>
+
+  <script type="text/javascript">
+
+    const BACKEND_URL = 'https://fbinstant-tictactoe-server.herokuapp.com';
+    // const BACKEND_URL = 'http://localhost:5000';
+    const IMAGES = ['love']; // ['title_img', 'love', 'like', 'fill']
+    var preloaded = {};
+
+    var game;
+    
+    window.onload = function() {
+      FBInstant.initializeAsync().then(function() {
+
+        // Preload images
+        IMAGES.forEach(function(imgName, index){
+          var img = new Image();
+          img.src = './img/' + imgName + '.png';
+          preloaded[imgName] = img;
+          FBInstant.setLoadingProgress(Math.ceil(index / IMAGES.length)*100);
+        })
+
+        // Finished loading. Start the game
+        FBInstant.startGameAsync().then(function() {
+          startGame();          
+        });
+      });
+    };
+
+    function startGame() {
+      game = new pixelDensityTest();
+    }
+  
+  </script>
+
+<div class="canvas-hodler"></div>
+
+<pre id="debug">
+
+</pre>
+ 
+</body>
+</html>

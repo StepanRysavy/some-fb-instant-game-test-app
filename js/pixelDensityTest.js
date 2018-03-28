@@ -3,7 +3,9 @@ var pixelDensityTest = function () {
 
 	var root = this;
 
-	root.ratio = innerWidth / 320;
+	console.log(window.devicePixelRatio);
+
+	root.ratio = window.innerWidth / 640;
 
 	console.log(root.ratio);
 
@@ -11,13 +13,15 @@ var pixelDensityTest = function () {
 		container: document.querySelector(".canvas-hodler"), 
 		fullscreen: false,
 		width: window.innerWidth,
-		height: window.innerHeight
+		height: window.innerHeight,
+		retina: window.devicePixelRatio > 1 ? true : false
 	});
 
 	root.ctx.imageSmoothingEnabled = true;
+	// root.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
 	root.like = new LIKE({
-		asset: preloaded.love, 
+		asset: preloaded.orange, 
 		ctx: root.ctx,
 		width: 100 * root.ratio,
 		height: 100 * root.ratio,
@@ -68,7 +72,7 @@ var pixelDensityTest = function () {
 
 	function generateFallingAsset (options) {
 		root.fallingAssets.push(new LIKE({
-			asset: preloaded.like, 
+			asset: preloaded.green, 
 			ctx: root.ctx, 
 			speed: options.speed * root.ratio, 
 			x: options.x, 
@@ -100,8 +104,6 @@ var LIKE = function (options) {
 	this.height = options.height || 100;
 	this.asset = options.asset;
 	this.ctx = options.ctx;
-
-	console.log(this);
 }
 
 LIKE.prototype = {
